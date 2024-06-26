@@ -1,0 +1,16 @@
+dataset:
+  train: data_file/ConvAI2/train_self_original_no_cands.txt
+  valid: data_file/ConvAI2/valid_self_original_no_cands.txt
+  max_context_turns: -1
+  max_token_length: 512
+
+model:
+  score_activation: 'softplus'
+
+training:
+  mode: normal
+  only_longest: False
+  task_type: generate_response
+  ensemble: false
+  tau_gold: 1.0
+  tau_sim: 1.0

@@ -1,0 +1,33 @@
+model:
+  model_type: 'selective_pt'
+  model_name: "facebook/opt-125m"
+  load_bit: 32
+  peft_type: "prompt_tuning"
+  K: 4
+  peft_config:
+    num_virtual_tokens: 8
+  normalizer: linear
+  normalizer_on: ['prompt', 'lm']
+
+training:
+  learning_rate: 1e-5
+  batch_size: 32
+  num_epochs: 1
+  mode: causal
+  only_longest: False
+  task_type: generate_response
+  log_dir: runs_prompt_convai2_selective_linear
+  contrastive: true
+  ensemble: true
+  selective_loss_weight: 0.4
+  contrastive_metric: bleu
+  contrastive_threshold: 20.0
+  contrastive_weight: 0.4
+  freeze_persona: yes
+  freeze_context: yes
+
+dataset:
+  train: data_file/ConvAI2/train_self_original_no_cands.txt
+  valid: data_file/ConvAI2/valid_self_original_no_cands.txt
+  max_context_turns: -1
+  max_token_length: 512

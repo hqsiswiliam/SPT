@@ -1,0 +1,34 @@
+model:
+  model_type: 'selective_pt'
+  model_name: "Llama-2-7b-chat-hf"
+  load_bit: 16
+  peft_type: "prompt_tuning"
+  K: 4
+  peft_config:
+    num_virtual_tokens: 1
+  normalizer: linear
+  normalizer_on: ['prompt', 'lm']
+
+training:
+  learning_rate: 1e-5
+  batch_size: 32
+  num_epochs: 1
+  mode: causal
+  adding_noise: 0.1
+  only_longest: False
+  task_type: generate_response
+  log_dir: runs_prompt_convai2_selective_linear
+  contrastive: true
+  ensemble: true
+  selective_loss_weight: 1.0
+  contrastive_metric: bleu
+  contrastive_threshold: 20.0
+  contrastive_weight: 1.0
+  freeze_persona: yes
+  freeze_context: yes
+
+dataset:
+  train: data_file/ConvAI2/train_self_original_no_cands.txt
+  valid: data_file/ConvAI2/valid_self_original_no_cands.txt
+  max_context_turns: -1
+  max_token_length: 512

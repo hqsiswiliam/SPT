@@ -1,0 +1,28 @@
+{
+  "train_micro_batch_size_per_gpu ": 1,
+  "gradient_accumulation_steps": 1,
+  "optimizer": {
+    "type": "Adam",
+    "params": {
+      "lr": 0.00015
+    }
+  },
+  "bf16": {
+    "enabled": false
+  },
+  "float16": {
+    "enabled": false
+  },
+
+  "zero_optimization": {
+    "stage": 2,
+    "offload_param": {
+      "device": "cpu",
+      "pin_memory": true,
+      "buffer_count": 5,
+      "buffer_size": 1e8,
+      "max_in_cpu": 1e9
+    }
+  }
+
+}
